@@ -51,17 +51,6 @@ Il workflow segue una strategia di sicurezza a più livelli:
 
 ---
 
-## 🔒 Minacce Neutralizzate
-| Attacco | Meccanismo di Difesa |
-| :--- | :--- |
-| **SQL Injection / XSS** | Regole gestite AWS WAF |
-| **Data Leakage** | Offuscamento AI-Driven delle PII |
-| **Ransomware** | Immutabilità del dato tramite S3 Object Lock |
-| **Data Breach (Database)** | Crittografia dei dati a riposo (KMS) |
-| **Unauthorized Access** | Zero Trust approach via IAM & VPC Private Subnets |
-
----
-
 ## 📈 Analisi dei Costi (Modello Pay-as-you-go)
 L'architettura è ottimizzata per il costo-efficacia:
 * **Serverless First**: Pagamento basato sul tempo di esecuzione reale (Lambda/Fargate).
@@ -95,15 +84,49 @@ Il sistema include un meccanismo di risposta automatica agli incidenti:
 * **Notifica:** Il team (AI Engineer/SecOps) riceve un alert via Email/SMS immediato.
   
 ---
+
+## 🔒 Minacce Neutralizzate
+| Attacco | Meccanismo di Difesa |
+| :--- | :--- |
+| **SQL Injection / XSS** | Regole gestite AWS WAF |
+| **Data Leakage** | Offuscamento AI-Driven delle PII |
+| **Ransomware** | Immutabilità del dato tramite S3 Object Lock |
+| **Data Breach (Database)** | Crittografia dei dati a riposo (KMS) |
+| **Lateral Movement** | Zero Trust Network |
+| **Accountability Gaps** | CloudTrail & GuardDuty |
   
 ## 🧪 Validation & Testing (PowerShell)
 
-### 1. WAF SQL Injection Test
-Il sistema blocca automaticamente tentativi di SQL Injection.
-![WAF Block](assets/waf_blocked.png)
+### 1. SQL Injection / XSS
+Blocca tentativi di manipolazione database e injection di script malevoli all'ingresso.
 
-### 2. AI PII Redaction
-I dati sensibili caricati vengono sanificati in tempo reale.
-![AI Redaction](assets/redaction_proof.png)
+<img width="592" height="243" alt="WAF Blocco SQL Injection" src="https://github.com/user-attachments/assets/231d7d24-db4e-4bdc-b625-1bd1b5f7a242" />
+
+
+### 2. Data Leakage
+Identifica e maschera automaticamente i dati sensibili prima dell'archiviazione.
+
+<img width="460" height="424" alt="Motore Masking PII" src="https://github.com/user-attachments/assets/4bbd18aa-7db8-4260-8b60-6f77bbcb26a8" />
+
+
+### 3. Ransomware
+Rende i backup immutabili (WORM), impedendo la cifratura o la cancellazione dei file.
+
+<img width="614" height="571" alt="Validazione Suite Test" src="https://github.com/user-attachments/assets/d7cb8ca1-2c62-4730-a18c-14094d0a9552" />
+
+### 4. Data Breach (Database)
+Protegge i dati a riposo tramite crittografia con rotazione automatica delle chiavi.
+
+<img width="1059" height="1024" alt="Codice IaC VPC e Endpoint" src="https://github.com/user-attachments/assets/e91fd793-916a-44cd-8db9-78d22ec335e2" />
+
+### 5. Lateral Movement
+Isola le risorse in sottoreti private, impedendo l'accesso diretto via internet.
+
+### 6. Accountability Gaps
+Monitora ogni azione e rileva comportamenti anomali tramite analisi intelligente dei log.
+
+<img width="962" height="293" alt="Report Tecnico ISOGDPR" src="https://github.com/user-attachments/assets/ac2461d5-635e-4835-98b9-1be73fda5c45" />
+
+
 
 Project Shield © 2026 
