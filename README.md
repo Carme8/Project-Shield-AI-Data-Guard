@@ -20,6 +20,13 @@ Il workflow segue una strategia di sicurezza a più livelli:
 
 ---
 
+### Definizione Infrastruttura (CDK)
+Il codice definisce l'intera architettura. Sintesi del template CloudFormation.
+
+<img width="1059" height="1024" alt="Codice IaC VPC e Endpoint" src="https://github.com/user-attachments/assets/e4f2f842-958d-4147-98ab-aa8b54939a8a" />
+
+---
+
 ## 🚀 Caratteristiche Chiave
 
 * **🛡️ Sicurezza Zero Trust:**
@@ -92,7 +99,6 @@ Il sistema include un meccanismo di risposta automatica agli incidenti:
 | **Data Leakage** | Offuscamento AI-Driven delle PII |
 | **Ransomware** | Immutabilità del dato tramite S3 Object Lock |
 | **Data Breach (Database)** | Crittografia dei dati a riposo (KMS) |
-| **Lateral Movement** | Zero Trust Network |
 | **Accountability Gaps** | CloudTrail & GuardDuty |
   
 ## 🧪 Validation & Testing (PowerShell)
@@ -102,12 +108,10 @@ Blocca tentativi di manipolazione database e injection di script malevoli all'in
 
 <img width="592" height="243" alt="WAF Blocco SQL Injection" src="https://github.com/user-attachments/assets/231d7d24-db4e-4bdc-b625-1bd1b5f7a242" />
 
-
 ### 2. Data Leakage
 Identifica e maschera automaticamente i dati sensibili prima dell'archiviazione.
 
 <img width="460" height="424" alt="Motore Masking PII" src="https://github.com/user-attachments/assets/4bbd18aa-7db8-4260-8b60-6f77bbcb26a8" />
-
 
 ### 3. Ransomware
 Rende i backup immutabili (WORM), impedendo la cifratura o la cancellazione dei file.
@@ -117,16 +121,32 @@ Rende i backup immutabili (WORM), impedendo la cifratura o la cancellazione dei 
 ### 4. Data Breach (Database)
 Protegge i dati a riposo tramite crittografia con rotazione automatica delle chiavi.
 
-<img width="1059" height="1024" alt="Codice IaC VPC e Endpoint" src="https://github.com/user-attachments/assets/e91fd793-916a-44cd-8db9-78d22ec335e2" />
+![Checklist di Compliance](https://github.com/user-attachments/assets/a3d5eafe-53cb-4e06-aacc-9b6c1395e4b0)
 
-### 5. Lateral Movement
-Isola le risorse in sottoreti private, impedendo l'accesso diretto via internet.
-
-### 6. Accountability Gaps
+### 5. Accountability Gaps
 Monitora ogni azione e rileva comportamenti anomali tramite analisi intelligente dei log.
 
 <img width="962" height="293" alt="Report Tecnico ISOGDPR" src="https://github.com/user-attachments/assets/ac2461d5-635e-4835-98b9-1be73fda5c45" />
 
 
+## 🔍  Dashboard Operativa
+
+La console PowerShell permette agli amministratori di monitorare l'intero stack e simulare attacchi per convalidare le difese.
+
+**Workflow Operativo visualizzato:**
+
+<img width="533" height="397" alt="Console Operativa PowerShell" src="https://github.com/user-attachments/assets/8ccb9f72-9e02-47ac-943d-fb9db795cef7" />
+
+
+
+* **Discovery:** Recupero automatico degli endpoint API e S3.
+
+* **WAF Test:** Blocco di un attacco SQL Injection (403 Forbidden).
+
+* **AI Pipeline:** Notifica di sanificazione dati PII in tempo reale.
+
+* **WORM Check:** Certificazione dello stato COMPLIANT dell'Object Lock.
+  
+---
 
 Project Shield © 2026 
