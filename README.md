@@ -121,7 +121,7 @@ Rende i backup immutabili (WORM), impedendo la cifratura o la cancellazione dei 
 ### 4. Data Breach (Database)
 Protegge i dati a riposo tramite crittografia con rotazione automatica delle chiavi.
 
-![Checklist di Compliance](https://github.com/user-attachments/assets/a3d5eafe-53cb-4e06-aacc-9b6c1395e4b0)
+![Checklist di Compliance](https://github.com/user-attachments/assets/ba883a6b-6f1f-49b4-9b70-8902cf1b41ad)
 
 ### 5. Accountability Gaps
 Monitora ogni azione e rileva comportamenti anomali tramite analisi intelligente dei log.
