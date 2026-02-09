@@ -4,7 +4,8 @@
 
 Project Shield è un'infrastruttura **DevSecOps** progettata per proteggere dati sensibili e workload AI. Utilizza un approccio *Zero Trust*, segregazione di rete avanzata e automazione AI per la conformità GDPR.
 
-![Architettura](assets/architecture.jpg)
+![Architecture_Diagram](https://github.com/user-attachments/assets/966f604e-56b1-412e-b8b4-86cf5f08fd77)
+
 
 ## 🚀 Caratteristiche Principali
 
