@@ -1,6 +1,6 @@
 # 🛡️ Project Shield: AI Data Guard
 
-> **Enterprise-Grade Security & Compliance Architecture on AWS**
+ **Enterprise-Grade Security & Compliance Architecture on AWS**
 
 Project Shield è un'infrastruttura **DevSecOps** progettata per proteggere dati sensibili e workload AI. Utilizza un approccio *Zero Trust*, segregazione di rete avanzata e automazione AI per la conformità GDPR.
 
@@ -49,7 +49,34 @@ L'architettura è ottimizzata per il costo-efficacia:
 * **Storage Tiering**: S3 e DynamoDB offrono modelli di pricing flessibili in base all'uso.
 
 ---
-## 🧪 Security Validation (Proof of Concepts)
+
+## 💎 Perché la struttura è valida
+* **Compliance-Ready**: Risponde ai rigorosi requisiti **GDPR/CCPA** mascherando automaticamente i dati identificativi (PII) direttamente all'ingresso del sistema.
+* **Sicurezza a Livelli (Defense-in-Depth)**: Implementa una protezione stratificata che mette al sicuro il dato dal perimetro (**WAF**), durante il transito (**VPC Private Subnets**) e a riposo (**KMS Encryption**).
+* **Automazione Totale (IaC)**: Grazie a **Python e CDK**, l'intera infrastruttura può essere distrutta e ricostruita in pochi minuti, garantendo un **Disaster Recovery** fulmineo e l'eliminazione dei *configuration drift*.
+* **Osservabilità**: L'integrazione tra **CloudWatch, GuardDuty e Security Hub** permette di avere una *"Single Pane of Glass"* (una visuale unica) sullo stato di salute e la postura di sicurezza dell'intero ecosistema.
+
+---
+
+## 🚀 Vantaggi Chiave
+* **Privacy Automata (AI-Driven)**: Riduzione dell'errore umano tramite Amazon Comprehend.
+* **Resilienza Multi-AZ**: Continuità operativa garantita dalla distribuzione su più data center.
+* **Immutabilità del Dato**: Protezione anti-ransomware tramite S3 Object Lock.
+* **Zero Infrastructure Management**: Focus totale sul codice grazie ai servizi Serverless.
+
+---
+
+## 🧪 Validation & Testing (PowerShell)
+*(Vedere la documentazione interna per gli script completi di validazione WAF e PII)*
+
+---
+
+## ⚙️ Deployment
+```bash
+pip install -r requirements.txt
+cdk synth
+cdk deplo
+
 
 ### 1. WAF SQL Injection Test
 Il sistema blocca automaticamente tentativi di SQL Injection.
