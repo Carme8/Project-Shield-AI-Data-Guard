@@ -1,15 +1,5 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
 .venv/
-venv/
-*.env
-
-# AWS CDK
 cdk.out/
-.cdk.staging/
-
-# IDE
-.vscode/
-.idea/
+__pycache__/
+*.pyc
+.DS_Store
