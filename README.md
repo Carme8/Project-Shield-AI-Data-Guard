@@ -4,31 +4,51 @@
 
 Project Shield è un'infrastruttura **DevSecOps** progettata per proteggere dati sensibili e workload AI. Utilizza un approccio *Zero Trust*, segregazione di rete avanzata e automazione AI per la conformità GDPR.
 
-L'intera infrastruttura è gestita tramite **Infrastructure as Code (IaC)** con AWS CDK in Python.
+L’intera infrastruttura è gestita tramite Infrastructure as Code (IaC) utilizzando AWS CDK in Python, per il deployment di una piattaforma AI sicura e scalabile su **AWS (regione: eu-south-1 – Milano).**
 
+Il seguente diagramma illustra il flusso dei dati e i componenti dell'infrastruttura:
 ![Architecture_Diagram](https://github.com/user-attachments/assets/966f604e-56b1-412e-b8b4-86cf5f08fd77)
 
 ## 🏗️ Architettura Tecnica
 Il workflow segue una strategia di sicurezza a più livelli:
 
-1.  **Protezione Perimetrale**: Filtro del traffico tramite **AWS WAF** (anti SQLi/XSS) e autenticazione centralizzata con **IAM Identity Center**.
-2.  **Compute & Scalabilità**: Orchestrazione di container **Amazon ECS Fargate** in configurazione Multi-AZ (High Availability).
-3.  **AI Data Scrubbing**: Una **Lambda Function** intercetta i dati e utilizza **Amazon Comprehend** per identificare e offuscare automaticamente informazioni personali.
-4.  **Storage Stratificato**:
-    * **Dati Sanificati**: Salvati su **DynamoDB** per accesso rapido.
-    * **Dati Originali**: Isolati in un **Vault S3** con **Object Lock** attivato (Write Once, Read Many) per prevenire cifratura da Ransomware.
-5.  **Governance**: Monitoraggio continuo tramite **Security Hub**, **GuardDuty** e **Macie**.
-   
+1.  **Accesso Sicuro:** L'utente accede tramite HTTPS. Il traffico viene filtrato da **AWS WAF** e gestito da **Amazon API Gateway**.
+2.  **Network & Compute:** Le richieste raggiungono un **ALB (Application Load Balancer)** che distribuisce il carico su container **Amazon ECS (Fargate)** distribuiti su due Availability Zones (Multi-AZ).
+3.  **Privacy & AI:** Un job di **Amazon Comprehend** viene attivato per analizzare i testi e rimuovere le PII (Personally Identifiable Information) prima dell'archiviazione.
+4.  **Storage:** I dati sanitizzati vengono salvati su **Amazon DynamoDB**.
+5.  **Monitoring & Sicurezza:** Servizi come **GuardDuty**, **Macie** e **Security Hub** monitorano costantemente l'ambiente per rilevare minacce e fughe di dati.
+
 ---
 
-## 🛠️ Tecnologie Utilizzate
-* **Linguaggi**: Python (Core logic & CDK), PowerShell (Validation testing).
-* **Compute**: AWS Lambda, Amazon ECS Fargate.
-* **Security**: AWS WAF, AWS Shield, IAM, AWS Key Management Service (KMS).
-* **AI/ML**: Amazon Comprehend (PII Detection).
-* **Storage**: Amazon S3 (Object Lock), Amazon DynamoDB.
-* **Monitoring**: AWS Security Hub, Amazon GuardDuty, Amazon CloudWatch.
-  
+## 🚀 Caratteristiche Chiave
+
+* **🛡️ Sicurezza Zero Trust:**
+    * Ispezione traffico in ingresso con WAF.
+    * Utilizzo di **PrivateLink** (VPC Endpoints) per mantenere il traffico tra servizi AWS sulla rete privata.
+    * Crittografia dei dati at-rest e in-transit gestita da **AWS KMS**.
+* **🤖 AI-Powered Compliance:** Integrazione nativa con **Amazon Comprehend** per la PII Reduction automatizzata.
+* **⚖️ Alta Disponibilità (HA):** Architettura ridondata su diverse Availability Zone (`eu-south-1a`, `eu-south-1b`).
+* **🔒 Governance dei Dati:**
+    * **S3 Object Lock** per immutabilità dei dati (WORM).
+    * Discovery dati sensibili con **Amazon Macie**.
+    * Audit log centralizzati con **CloudTrail**.
+* **⚙️ DevOps:** Pipeline CI/CD completamente automatizzata tramite **AWS CodePipeline** e GitHub.
+
+---
+
+## 🛠️ Stack Tecnologico
+
+| Categoria | Servizi AWS Utilizzati |
+| :--- | :--- |
+| **Compute** | Amazon ECS (Fargate), AWS Lambda |
+| **Networking** | VPC, ALB, API Gateway, NAT Gateway, PrivateLink |
+| **Storage & DB** | Amazon DynamoDB, Amazon S3 (Object Lock), AWS Backup |
+| **Security** | WAF, Shield, IAM Identity Center, KMS, Secrets Manager |
+| **AI/ML** | Amazon Comprehend (PII Detection) |
+| **Observability** | CloudWatch, EventBridge, Security Hub, GuardDuty, Macie |
+| **DevTools** | AWS CodePipeline, GitHub |
+| **Linguaggi** | Python (CDK), PowerShell (Validation testing) |
+
 ---
 
 ## 🔒 Minacce Neutralizzate
@@ -66,17 +86,17 @@ L'architettura è ottimizzata per il costo-efficacia:
 
 ---
 
-## 🧪 Validation & Testing (PowerShell)
-*(Vedere la documentazione interna per gli script completi di validazione WAF e PII)*
+## 🔐 Sicurezza e Monitoraggio
 
+Il sistema include un meccanismo di risposta automatica agli incidenti:
+* **Rilevamento:** GuardDuty o Macie rilevano un'anomalia.
+* **Aggregazione:** L'evento viene inviato a **Security Hub**.
+* **Azione:** **EventBridge** intercetta l'evento e attiva un topic **SNS**.
+* **Notifica:** Il team (AI Engineer/SecOps) riceve un alert via Email/SMS immediato.
+  
 ---
-
-## ⚙️ Deployment
-```bash
-pip install -r requirements.txt
-cdk synth
-cdk deplo
-
+  
+## 🧪 Validation & Testing (PowerShell)
 
 ### 1. WAF SQL Injection Test
 Il sistema blocca automaticamente tentativi di SQL Injection.
@@ -85,11 +105,5 @@ Il sistema blocca automaticamente tentativi di SQL Injection.
 ### 2. AI PII Redaction
 I dati sensibili caricati vengono sanificati in tempo reale.
 ![AI Redaction](assets/redaction_proof.png)
-
----
-
-## ⚙️ Installazione & Deployment
-Prerequisiti: AWS CLI e CDK installati.
-
 
 Project Shield © 2026 
