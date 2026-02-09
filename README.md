@@ -33,4 +33,4 @@ I dati sensibili caricati vengono sanificati in tempo reale.
 ![AI Redaction](assets/redaction_proof.png)
 
 ---
-*Project Shield © 2026 
+ Project Shield © 2026 
